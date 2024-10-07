@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="./js/all.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="sign">
+        <img class="sign-left" src="./img/left.png" alt="" />
+        <img class="logo-img" src="./img/logo_lg.png" alt="" />
+        <div class="sign-right">
+          <h6>註冊帳號</h6>
+          <form class="sign-form">
+            <label for="sign-email">Email</label>
+            <input id="sign-email" placeholder="請輸入Email" type="text" />
+            <label for="sign-nickname">您的暱稱</label>
+            <input
+              id="sign-nickname"
+              placeholder="請輸入您的暱稱"
+              type="text"
+            />
+            <label for="sign-password">密碼</label>
+            <input
+              id="sign-password"
+              placeholder="請輸入密碼"
+              type="password"
+            />
+            <label for="sign-confirm-password">再次輸入密碼</label>
+            <input
+              id="sign-confirm-password"
+              placeholder="請再次輸入密碼"
+              type="password"
+            />
+            <div class="sign-button">
+              <button class="register-btn" type="button">註冊帳號</button>
+              <button class="login-btn" type="button">登入</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="login none">
+        <img class="login-left" src="./img/left.png" alt="" />
+        <img class="logo-img" src="./img/logo_lg.png" alt="" />
+        <div class="login-right">
+          <h6>最實用的線上代辦事項服務</h6>
+          <form class="login-form">
+            <label for="login-email">Email</label>
+            <input id="login-email" placeholder="請輸入Email" type="text" />
+            <label for="login-pw">密碼</label>
+            <input id="login-pw" placeholder="請輸入您的暱稱" type="password" />
+            <div class="login-button">
+              <button class="loginBtn" type="button">登入</button>
+              <button class="login-register-btn" type="button">註冊帳號</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="todoList none">
+        <header>
+          <a href=""
+            ><img class="header-logo" src="./img/logo_lg.png" alt=""
+          /></a>
+          <ul>
+            <li><a class="header-li" href="">王小明的代辦</a></li>
+            <li><a class="logout" href="javascript:void(0)">登出</a></li>
+          </ul>
+        </header>
+        <div class="addTodo">
+          <input
+            id="new-todo-input"
+            placeholder="新增待辦事項"
+            type="text"
+            name=""
+            id=""
+          />
+          <button id="add-todo-btn" type="button">
+            <img class="plus-img" src="./img/plus 1.png" alt="" />
+          </button>
+        </div>
+        <div class="empty-content">
+          <h6>目前尚無代辦事項</h6>
+          <img src="./img/empty1.png" alt="" />
+        </div>
+        <div class="checklist-container">
+          <div class="tabs">
+            <button class="tab active" data-filter="all">全部</button>
+            <button class="tab" data-filter="incomplete">待完成</button>
+            <button class="tab" data-filter="completed">已完成</button>
+          </div>
+          <ul class="todo-list-content" id="todo-list"></ul>
+          <div class="todo-footer">
+            <span class="todo-count">0 個待完成項目</span>
+            <button type="button" class="clear-completed">
+              清除已完成項目
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const signUpForm = document.querySelector(".sign");
+    const loginForm = document.querySelector(".login");
+    const emailInput = document.getElementById("sign-email");
+    const usernameInput = document.getElementById("sign-nickname");
+    const passwordInput = document.getElementById("sign-password");
+    const confirmPasswordInput = document.getElementById(
+      "sign-confirm-password"
+    );
+    const registerButton = document.querySelector(".register-btn");
+    const loginButton = document.querySelector(".loginBtn");
+
+    const tabs = document.querySelectorAll(".tab");
+
+    window.addEventListener("load", () => {
+      const storedToken = localStorage.getItem("Authorization");
+      if (storedToken) {
+        axios.defaults.headers.common["Authorization"] = storedToken;
+        // alert("已經自動登入，無需再次登入");
+        // 自動顯示 TODO 列表
+        signUpForm.classList.add("none");
+        loginForm.classList.add("none");
+        document.querySelector(".todoList").classList.remove("none");
+        getTodo();
+      }
+    });
+
+    registerButton.addEventListener("click", () => {
+      const email = emailInput.value.trim();
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value.trim();
+      const confirmPassword = confirmPasswordInput.value.trim();
+      const atIndex = email.indexOf("@");
+
+      if (
+        !email ||
+        !email.includes("@") ||
+        atIndex < 1 ||
+        atIndex === email.length - 1
+      ) {
+        alert("請輸入有效的 Email 地址，並確認 @ 前後不得為空值");
+        return;
+      } else if (password.length < 6) {
+        alert("密碼字數太少，至少需要 6 個字!");
+        return;
+      } else if (!email || !username || !password) {
+        alert("請確認所有欄位已填寫且密碼相符！");
+        return;
+      } else if (password !== confirmPassword) {
+        alert("確認密碼必須跟密碼一樣!");
+        return;
+      }
+      signUp(email, username, password);
+    });
+
+    loginButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      const loginEmailInput = document.getElementById("login-email");
+      const loginPasswordInput = document.getElementById("login-pw");
+
+      const loginEmail = loginEmailInput.value.trim();
+      const loginPassword = loginPasswordInput.value.trim();
+
+      const atIndex = loginEmail.indexOf("@");
+      if (!loginEmail || atIndex < 1 || atIndex === loginEmail.length - 1) {
+        alert("請輸入有效的 Email 地址，並確認 @ 符號前後不得為空");
+        return;
+      } else if (loginPassword.length < 6) {
+        alert("密碼字數太少，至少需要 6 個字符");
+        return;
+      }
+
+      login(loginEmail, loginPassword);
+    });
+
+    // 為每個 tab 按鈕添加點擊事件監聽器
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        // 移除所有按鈕的 active 類
+        tabs.forEach((t) => t.classList.remove("active"));
+
+        // 為被點擊的按鈕添加 active 類
+        tab.classList.add("active");
+
+        // 你可以在這裡根據 tab 的 data-filter 屬性執行過濾操作
+        const filter = tab.getAttribute("data-filter");
+        filterTodos(filter);
+      });
+    });
+
+    function filterTodos(filter) {
+      const todoItems = document.querySelectorAll(".todo-item"); // 獲取所有的待辦事項
+      todoItems.forEach((item) => {
+        // 根據 filter 的值顯示或隱藏待辦事項
+        const isCompleted = item.querySelector(".checkbox").checked;
+        if (
+          filter === "all" ||
+          (filter === "incomplete" && !isCompleted) ||
+          (filter === "completed" && isCompleted)
+        ) {
+          item.style.display = ""; // 顯示
+        } else {
+          item.style.display = "none"; // 隱藏
+        }
+      });
+    }
+
+    document.querySelector(".login-btn").addEventListener("click", (e) => {
+      e.preventDefault();
+      signUpForm.classList.add("none");
+      loginForm.classList.remove("none");
+    });
+
+    document
+      .querySelector(".login-register-btn")
+      .addEventListener("click", (e) => {
+        e.preventDefault();
+        loginForm.classList.add("none");
+        signUpForm.classList.remove("none");
+      });
+
+  </script>
+</html>

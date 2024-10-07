@@ -1,0 +1,514 @@
+@import "_mixin.scss";
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  color: #333333;
+  font-weight: 700;
+  line-height: 1;
+  background-color: #ffd370;
+  font-family: "Noto Sans TC", sans-serif;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+a:hover {
+  background-color: darkkhaki;
+  border-radius: 10px;
+}
+*:hover {
+  transition: 0.6s ease;
+}
+
+input::placeholder {
+  color: #9f9a91; /* 設置佔位符文字的顏色 */
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.logo-img {
+  width: 312px;
+  height: 47px;
+  display: none;
+  @include pad {
+    display: block;
+  }
+}
+.header-logo {
+  max-width: 242px;
+  height: 38px;
+  margin-top: 16px;
+}
+.sign {
+  padding-top: 81px;
+  padding-bottom: 80px;
+  max-width: 793px;
+  display: flex;
+  justify-content: center;
+  column-gap: 103px;
+  @include pad {
+    flex-direction: column;
+  }
+}
+.sign-form {
+  display: flex;
+  flex-direction: column;
+}
+.sign-left {
+  margin: 30px 0 31px 0;
+  @include pad {
+    display: none;
+  }
+}
+.sign-right {
+  width: 304px;
+  h6 {
+    font-size: 24px;
+    margin-bottom: 24px;
+    height: 35px;
+    @include pad {
+      text-align: center;
+      margin-top: 16px;
+      margin-bottom: 26px;
+    }
+  }
+  label {
+    font-size: 14px;
+    padding: 3px 0;
+    margin-bottom: 4px;
+  }
+  input {
+    padding-left: 16px;
+    height: 47px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 16px;
+  }
+}
+.sign-form input:nth-last-of-type(1) {
+  margin-bottom: 24px;
+}
+.sign-button {
+  display: flex;
+  row-gap: 12px;
+  flex-direction: column;
+  align-items: center;
+}
+button {
+  background: none;
+  border: none;
+  margin: 0;
+  font: inherit;
+  font-size: 16px;
+  cursor: pointer;
+}
+button {
+  width: 160px;
+  height: 47px;
+}
+button:hover {
+  color: white;
+  border-radius: 10px;
+  padding: 12px 48px;
+  background-color: #333333;
+}
+.login {
+  padding-top: 87px;
+  padding-bottom: 87px;
+  max-width: 796px;
+  display: flex;
+  justify-content: center;
+  column-gap: 106px;
+  @include pad {
+    flex-direction: column;
+  }
+}
+.login-left {
+  @include pad {
+    display: none;
+  }
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+.login-right {
+  width: 304px;
+  margin-top: 62px;
+  @include pad {
+    margin-top: 16px;
+  }
+  h6 {
+    font-size: 24px;
+    margin-bottom: 24px;
+    height: 35px;
+    @include pad {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+  }
+  label {
+    font-size: 14px;
+    padding: 3px 0;
+    margin-bottom: 4px;
+  }
+  input {
+    padding-left: 16px;
+    height: 47px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 40px;
+  }
+}
+.login-form input:nth-last-of-type(1) {
+  margin-bottom: 24px;
+}
+.login-button {
+  display: flex;
+  row-gap: 12px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todoList {
+  width: 100%;
+  header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 32px 0 34px;
+
+    .header-li {
+      @include pad {
+        display: none;
+      }
+    }
+
+    ul {
+      display: flex;
+      padding-top: 24px;
+      height: 23px;
+      column-gap: 24px;
+      font-size: 16px;
+      @include pad {
+        justify-content: center;
+      }
+      a {
+        text-decoration: none;
+        color: #333333;
+      }
+    }
+  }
+}
+.addTodo {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 60px;
+  width: 500px;
+  margin: 0 auto;
+  position: relative;
+  @include pad {
+    max-width: 311px;
+  }
+
+  input {
+    width: 500px;
+    max-width: 100%;
+    height: 47px;
+    border: none;
+    border-radius: 10px;
+    padding-left: 16px;
+    @include pad {
+      max-width: 311px;
+    }
+  }
+  a {
+    display: flex;
+    align-items: center;
+    margin-left: -40px;
+  }
+}
+#add-todo-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 44px;
+}
+.empty-content {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h6 {
+    font-weight: 400;
+    text-align: center;
+    font-size: 16px;
+    height: 23px;
+  }
+}
+.checklist-container {
+  background-color: white;
+  border-radius: 10px;
+  margin: 0 auto;
+  width: 500px;
+  max-width: 100%;
+  padding-bottom: 16px;
+  @include pad {
+    max-width: 312px;
+  }
+}
+.active {
+  border-bottom: 2px solid #333333;
+}
+
+.tabs {
+  height: 51px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid #efefef;
+  button {
+    color: #9f9a91;
+    padding: 0;
+    // border-bottom: 2px solid red;
+    @include pad {
+      width: 104px;
+      padding: 0;
+    }
+  }
+}
+.todo-list-content {
+  padding-left: 24px;
+  padding-right: 20px;
+  padding-top: 23px;
+  font-size: 14px;
+  @include pad {
+    padding: 0 16px;
+  }
+  input {
+    min-width: 20px;
+    height: 20px;
+  }
+  span {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.todo-item-left {
+  display: flex;
+}
+
+.todo-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 36px;
+  padding: 0 48px 0 24px;
+  margin-top: 16px;
+  @include pad{
+    padding: 0 16px;
+  }
+}
+.todo-count {
+  font-weight: 400;
+  font-size: 14px;
+}
+.clear-completed {
+  color: #9f9a91;
+  font-size: 14px;
+  font-weight: 400;
+  height: 20px;
+  padding: 0;
+  text-align: right;
+}
+.clear-completed:hover{
+    width: 160px;
+    color: red;
+}
+/* 原始 checkbox 的初始樣式，保持可見 */
+.checkbox {
+  position: relative;
+  margin-right: 16px; /* 讓 checkbox 和文字保持適當間距 */
+  cursor: pointer;
+}
+
+/* 勾選後隱藏預設的 checkbox 框框 */
+.checkbox:checked {
+  opacity: 0; /* 或使用 visibility: hidden; */
+}
+
+/* 自定義 checkbox 的樣式 */
+.custom-checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  // padding-left: 0;
+}
+
+/* 當 checkbox 被勾選時，顯示自定義圖片 */
+.checkbox:checked + .custom-checkbox::before {
+  content: "";
+  position: absolute;
+  left: -35px;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url("../img/Vector.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.delete-btn {
+  width: 14px;
+  height: 14px;
+  padding: 0;
+}
+.todo-list-content {
+  li {
+    border-bottom-width: 1px; /* 設定底線寬度為 5px */
+    border-bottom-style: solid; /* 必須設置樣式屬性，否則無法顯示 */
+    border-bottom-color: #e5e5e5; /* 指定顏色為藍色 */
+    padding-bottom: 16px;
+    padding-top: 16px;
+  }
+}
+.none {
+  display: none;
+  font-weight: 400;
+}
