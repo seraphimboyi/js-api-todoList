@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("Authorization");
     delete axios.defaults.headers.common["Authorization"];
     alert("登出成功！");
-    window.location.href = "../index.html"; //
+    window.location.href = "/"; 
   }
 });
 
