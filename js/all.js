@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("Authorization");
     delete axios.defaults.headers.common["Authorization"];
     alert("登出成功！");
-    window.location.href = "/"; 
+    window.location.href = "https://seraphimboyi.github.io/js-api-todoList/"; 
   }
 });
 
