@@ -1,4 +1,3 @@
-url
+專案頁面:
 
-
-https://seraphimboyi.github.io/js-api-todoList-/
+https://seraphimboyi.github.io/js-api-todoList/
