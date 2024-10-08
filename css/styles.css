@@ -1,4 +1,3 @@
-@charset "UTF-8";
 html,
 body,
 div,
@@ -150,11 +149,11 @@ a:hover {
 }
 
 input::-moz-placeholder {
-  color: #9f9a91; /* 設置佔位符文字的顏色 */
+  color: #9f9a91;
 }
 
 input::placeholder {
-  color: #9f9a91; /* 設置佔位符文字的顏色 */
+  color: #9f9a91;
 }
 
 .wrapper {
@@ -520,26 +519,26 @@ button:hover {
   height: 20px;
   padding: 0;
   text-align: right;
+  width: 98px;
 }
 
 .clear-completed:hover {
-  width: 160px;
   color: red;
+  width: 98px;
+  padding: 0;
+  background-color: #FFD370;
 }
 
-/* 原始 checkbox 的初始樣式，保持可見 */
 .checkbox {
   position: relative;
-  margin-right: 16px; /* 讓 checkbox 和文字保持適當間距 */
+  margin-right: 16px;
   cursor: pointer;
 }
 
-/* 勾選後隱藏預設的 checkbox 框框 */
 .checkbox:checked {
-  opacity: 0; /* 或使用 visibility: hidden; */
+  opacity: 0;
 }
 
-/* 自定義 checkbox 的樣式 */
 .custom-checkbox {
   position: relative;
   display: flex;
@@ -547,7 +546,6 @@ button:hover {
   cursor: pointer;
 }
 
-/* 當 checkbox 被勾選時，顯示自定義圖片 */
 .checkbox:checked + .custom-checkbox::before {
   content: "";
   position: absolute;
@@ -567,9 +565,7 @@ button:hover {
 }
 
 .todo-list-content li {
-  border-bottom-width: 1px; /* 設定底線寬度為 5px */
-  border-bottom-style: solid; /* 必須設置樣式屬性，否則無法顯示 */
-  border-bottom-color: #e5e5e5; /* 指定顏色為藍色 */
+  border-bottom: 1px solid #e5e5e5;
   padding-bottom: 16px;
   padding-top: 16px;
 }
