@@ -51,10 +51,12 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("Authorization");
     delete axios.defaults.headers.common["Authorization"];
     alert("登出成功！");
-    // window.location.href = "https://seraphimboyi.github.io/js-api-todoList/";
-    window.location.href = "../index.html";
+    if (window.location.hostname === "localhost") {
+      window.location.href = "../index.html";
+    } else {
+      window.location.href = "https://seraphimboyi.github.io/js-api-todoList/index.html";
+    }
   }
-});
 
 function signUp(email, nickname, password) {
   axios
