@@ -51,7 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("Authorization");
     delete axios.defaults.headers.common["Authorization"];
     alert("登出成功！");
-    window.location.href = "https://seraphimboyi.github.io/js-api-todoList/"; 
+    // window.location.href = "https://seraphimboyi.github.io/js-api-todoList/";
+    window.location.href = "../index.html";
   }
 });
 
@@ -73,7 +74,6 @@ function signUp(email, nickname, password) {
       alert(`註冊失敗：${error.response.data.error}`);
     });
 }
-
 function login(email, password) {
   axios
     .post(`${apiUrl}/users/sign_in`, {
@@ -87,7 +87,12 @@ function login(email, password) {
       axios.defaults.headers.common["Authorization"] = token;
 
       localStorage.setItem("Authorization", token);
+      localStorage.setItem("nickname", res.data.nickname); // 儲存暱稱到 localStorage
+      console.log(res.data);
       alert("登入成功!");
+
+      // 更新顯示的暱稱
+      updateNickname(res.data.nickname);
 
       signUpForm.classList.add("none");
       loginForm.classList.add("none");
@@ -100,6 +105,14 @@ function login(email, password) {
       console.error("登入失敗：", error.response);
       alert(`登入失敗：${error.response.data.message}`);
     });
+}
+
+// 更新顯示的暱稱
+function updateNickname(nickname) {
+  const headerLi = document.querySelector(".header-li"); // 獲取 header-li 元素
+  if (headerLi) {
+    headerLi.textContent = `${nickname}的代辦`; // 更新內容
+  }
 }
 
 function getTodo() {
@@ -180,6 +193,11 @@ function updateTodoCount() {
 // 當 DOM 加載完成後，獲取所有的刪除按鈕並添加事件監聽器
 document.addEventListener("DOMContentLoaded", () => {
   getTodo(); // 獲取待辦事項
+  // 檢查 localStorage 中的 nickname 並更新 UI
+  const nickname = localStorage.getItem("nickname");
+  if (nickname) {
+    updateNickname(nickname); // 更新顯示的暱稱
+  }
 
   // 監聽待辦事項列表的點擊事件
   document.getElementById("todo-list").addEventListener("click", (event) => {
@@ -196,7 +214,7 @@ function deleteTodo(todoId) {
     .delete(`${apiUrl}/todos/${todoId}`)
     .then((res) => {
       alert("待辦事項已刪除！");
-      getTodo(); // 刪除後重新獲取待辦事項
+      getTodo();
     })
     .catch((err) => console.log(err.response));
 }

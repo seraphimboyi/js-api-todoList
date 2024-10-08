@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("Authorization");
     delete axios.defaults.headers.common["Authorization"];
     alert("登出成功！");
-    window.location.href = "../index.html"; //
+    window.location.href = "https://seraphimboyi.github.io/js-api-todoList/"; 
   }
 });
 
@@ -87,12 +87,13 @@ function login(email, password) {
       axios.defaults.headers.common["Authorization"] = token;
 
       localStorage.setItem("Authorization", token);
+      console.log(res.data);
       alert("登入成功!");
 
       signUpForm.classList.add("none");
       loginForm.classList.add("none");
       document.querySelector(".todoList").classList.remove("none");
-
+      
       // 可選：如果需要立即獲取 TODO 項目，可以在這裡調用 getTodo()
       getTodo();
     })
@@ -196,7 +197,7 @@ function deleteTodo(todoId) {
     .delete(`${apiUrl}/todos/${todoId}`)
     .then((res) => {
       alert("待辦事項已刪除！");
-      getTodo(); // 刪除後重新獲取待辦事項
+      getTodo(); 
     })
     .catch((err) => console.log(err.response));
 }

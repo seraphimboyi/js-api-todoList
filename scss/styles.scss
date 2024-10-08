@@ -382,23 +382,28 @@ button:hover {
     max-width: 312px;
   }
 }
-.active {
-  border-bottom: 2px solid #333333;
-}
 .tabs {
+  border-bottom: 2px solid #efefef;
   height: 51px;
   display: flex;
   justify-content: center;
-  border-bottom: 2px solid #efefef;
   button {
+    width: 167px;
     color: #9f9a91;
     padding: 0;
+    height: 51px;
     @include pad {
       width: 104px;
       padding: 0;
     }
   }
 }
+.tabs button:active{
+  border-bottom: 2px solid red;
+}
+.active {
+  border-bottom: 2px solid #333333;
+} 
 .todo-list-content {
   padding-left: 24px;
   padding-right: 20px;
