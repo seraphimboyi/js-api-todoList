@@ -162,6 +162,15 @@ input::placeholder {
   justify-content: center;
 }
 
+.background {
+  width: 100%;
+  background-position: center;
+  background-image: url("../img/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
 .logo-img {
   width: 312px;
   height: 47px;
@@ -532,7 +541,7 @@ button:hover {
   color: red;
   width: 98px;
   padding: 0;
-  background-color: #FFD370;
+  background-color: #ffd370;
 }
 
 .checkbox {
@@ -574,6 +583,11 @@ button:hover {
   border-bottom: 1px solid #e5e5e5;
   padding-bottom: 16px;
   padding-top: 16px;
+}
+
+.completed {
+  color: #9F9A91;
+  text-decoration: line-through;
 }
 
 .none {

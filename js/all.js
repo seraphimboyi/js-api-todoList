@@ -51,12 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("Authorization");
     delete axios.defaults.headers.common["Authorization"];
     alert("登出成功！");
-    if (window.location.hostname === "localhost") {
-      window.location.href = "../index.html";
-    } else {
-      window.location.href = "https://seraphimboyi.github.io/js-api-todoList/index.html";
-    }
+    window.location.href = "https://seraphimboyi.github.io/js-api-todoList/";
+    // window.location.href = "../index.html";
   }
+});
 
 function signUp(email, nickname, password) {
   axios
@@ -89,8 +87,7 @@ function login(email, password) {
       axios.defaults.headers.common["Authorization"] = token;
 
       localStorage.setItem("Authorization", token);
-      localStorage.setItem("nickname", res.data.nickname); // 儲存暱稱到 localStorage
-      console.log(res.data);
+      localStorage.setItem("nickname", res.data.nickname);
       alert("登入成功!");
 
       // 更新顯示的暱稱
@@ -99,8 +96,6 @@ function login(email, password) {
       signUpForm.classList.add("none");
       loginForm.classList.add("none");
       document.querySelector(".todoList").classList.remove("none");
-
-      // 可選：如果需要立即獲取 TODO 項目，可以在這裡調用 getTodo()
       getTodo();
     })
     .catch((error) => {
@@ -160,8 +155,21 @@ function getTodo() {
         // 添加 checkbox 的事件監聽器
         const checkbox = li.querySelector(".checkbox");
         checkbox.addEventListener("change", () => {
-          toggleTodo(todo.id); // 切換待辦事項狀態
+          // 切換待辦事項狀態
+          toggleTodo(todo.id);
+
+          const text = li.querySelector(".text");
+          if (checkbox.checked) {
+            text.classList.add("completed"); 
+          } else {
+            text.classList.remove("completed"); 
+          }
         });
+
+        if (todo.completed_at) {
+          const text = li.querySelector(".text");
+          text.classList.add("completed");
+        }
       });
 
       // 計算未完成的待辦事項數量
@@ -171,7 +179,7 @@ function getTodo() {
         ".todo-count"
       ).textContent = `${incompleteCount} 個待完成項目`;
     })
-    .catch((err) => console.log(err.response));
+    .catch((err) => console.log(err));
 }
 
 // 計算未完成項目數量並更新顯示的函數

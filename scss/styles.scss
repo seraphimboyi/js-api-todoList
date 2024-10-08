@@ -149,6 +149,15 @@ input::placeholder {
   display: flex;
   justify-content: center;
 }
+.background {
+  width: 100%;
+  background-position: center;
+  background-image: url("../img/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh; 
+}
+
 .logo-img {
   width: 312px;
   height: 47px;
@@ -398,12 +407,12 @@ button:hover {
     }
   }
 }
-.tabs button:active{
+.tabs button:active {
   border-bottom: 2px solid red;
 }
 .active {
   border-bottom: 2px solid #333333;
-} 
+}
 .todo-list-content {
   padding-left: 24px;
   padding-right: 20px;
@@ -458,7 +467,7 @@ button:hover {
   color: red;
   width: 98px;
   padding: 0;
-  background-color: #FFD370;
+  background-color: #ffd370;
 }
 .checkbox {
   position: relative;
@@ -497,6 +506,10 @@ button:hover {
     padding-bottom: 16px;
     padding-top: 16px;
   }
+}
+.completed {
+  color: #9F9A91;
+  text-decoration: line-through;
 }
 .none {
   display: none;
