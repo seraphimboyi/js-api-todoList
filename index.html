@@ -10,7 +10,6 @@
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
-    <script src="./js/all.js"></script>
   </head>
   <body>
     <div class="wrapper">
@@ -108,6 +107,7 @@
         </div>
       </div>
     </div>
+    <script src="./js/all.js"></script>
   </body>
   <script>
     const signUpForm = document.querySelector(".sign");
@@ -120,22 +120,23 @@
     );
     const registerButton = document.querySelector(".register-btn");
     const loginButton = document.querySelector(".loginBtn");
+    const logoutButton = document.querySelector(".logout");
 
     const tabs = document.querySelectorAll(".tab");
 
-    window.addEventListener("load", () => {
+    // HtmlDOM資源載入完畢後，檢查是否已登入，若已登入就顯示TodoList。
+    document.addEventListener("DOMContentLoaded", () => {
       const storedToken = localStorage.getItem("Authorization");
       if (storedToken) {
         axios.defaults.headers.common["Authorization"] = storedToken;
-        // alert("已經自動登入，無需再次登入");
-        // 自動顯示 TODO 列表
-        signUpForm.classList.add("none");
-        loginForm.classList.add("none");
-        document.querySelector(".todoList").classList.remove("none");
+        signUpForm.style.display = "none"; 
+        loginForm.style.display = "none"; 
+        document.querySelector(".todoList").style.display = "block"; 
         getTodo();
       }
     });
 
+    // 註冊功能按鈕事件(裡面是檢查條件，若都通過就執行signUp函式)
     registerButton.addEventListener("click", () => {
       const email = emailInput.value.trim();
       const username = usernameInput.value.trim();
@@ -164,15 +165,15 @@
       signUp(email, username, password);
     });
 
+    // 登入功能按鈕事件(裡面是檢查條件，若都通過就執行login函式)
     loginButton.addEventListener("click", (e) => {
       e.preventDefault();
       const loginEmailInput = document.getElementById("login-email");
       const loginPasswordInput = document.getElementById("login-pw");
-
       const loginEmail = loginEmailInput.value.trim();
       const loginPassword = loginPasswordInput.value.trim();
-
       const atIndex = loginEmail.indexOf("@");
+
       if (!loginEmail || atIndex < 1 || atIndex === loginEmail.length - 1) {
         alert("請輸入有效的 Email 地址，並確認 @ 符號前後不得為空");
         return;
@@ -180,8 +181,12 @@
         alert("密碼字數太少，至少需要 6 個字符");
         return;
       }
-
       login(loginEmail, loginPassword);
+    });
+
+    logoutButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      logout();
     });
 
     // 為每個 tab 按鈕添加點擊事件監聽器

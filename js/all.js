@@ -37,24 +37,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const logoutButton = document.querySelector(".logout");
-
-  // 當登出按鈕被點擊時
-  logoutButton.addEventListener("click", (event) => {
-    event.preventDefault(); // 防止頁面跳轉
-    logout(); // 調用登出函數
-  });
-
-  // 登出函數
-  function logout() {
-    localStorage.removeItem("Authorization");
-    delete axios.defaults.headers.common["Authorization"];
-    alert("登出成功！");
-    window.location.href = "https://seraphimboyi.github.io/js-api-todoList/";
-    // window.location.href = "../index.html";
-  }
-});
+function logout() {
+  localStorage.removeItem("Authorization");
+  delete axios.defaults.headers.common["Authorization"];
+  alert("登出成功！");
+  // window.location.href = "https://seraphimboyi.github.io/js-api-todoList/";
+  window.location.href = "../index.html";
+}
 
 function signUp(email, nickname, password) {
   axios
@@ -85,7 +74,6 @@ function login(email, password) {
     .then((res) => {
       const token = res.headers.authorization;
       axios.defaults.headers.common["Authorization"] = token;
-
       localStorage.setItem("Authorization", token);
       localStorage.setItem("nickname", res.data.nickname);
       alert("登入成功!");
@@ -116,11 +104,11 @@ function getTodo() {
   axios
     .get(`${apiUrl}/todos`)
     .then((res) => {
-      const todos = res.data.todos; // 獲取待辦事項數組
-      const todoList = document.getElementById("todo-list"); // 獲取待辦事項列表元素
-      const emptyContent = document.querySelector(".empty-content"); // 獲取 empty-content 元素
-      const checklistContainer = document.querySelector(".checklist-container"); // 獲取 checklist-container 元素
-      todoList.innerHTML = ""; // 清空現有的待辦事項
+      const todos = res.data.todos;
+      const todoList = document.getElementById("todo-list");
+      const emptyContent = document.querySelector(".empty-content");
+      const checklistContainer = document.querySelector(".checklist-container");
+      todoList.innerHTML = "";
 
       // 檢查是否有待辦事項，如果沒有則顯示 empty-content，否則隱藏
       if (todos.length === 0) {
@@ -131,7 +119,7 @@ function getTodo() {
         checklistContainer.classList.remove("none");
       }
 
-      // 渲染待辦事項到列表中
+      // 渲染待辦事項到列表
       todos.forEach((todo) => {
         const li = document.createElement("li");
         li.className = "todo-item";
@@ -149,20 +137,18 @@ function getTodo() {
             <img src="./img/delete.png" alt="Delete Icon" />
           </a>
         `;
-
         todoList.appendChild(li); // 將新生成的 li 元素添加到列表中
 
         // 添加 checkbox 的事件監聽器
         const checkbox = li.querySelector(".checkbox");
         checkbox.addEventListener("change", () => {
-          // 切換待辦事項狀態
           toggleTodo(todo.id);
 
           const text = li.querySelector(".text");
           if (checkbox.checked) {
-            text.classList.add("completed"); 
+            text.classList.add("completed");
           } else {
-            text.classList.remove("completed"); 
+            text.classList.remove("completed");
           }
         });
 
@@ -250,19 +236,17 @@ document.addEventListener("DOMContentLoaded", () => {
     for (const checkbox of checkboxes) {
       if (checkbox.checked) {
         const todoId = checkbox.id.split("-")[1]; // 獲取待辦項目的 ID
-        await uncheckTodo(todoId); // 直接等待每個請求完成
+        await uncheckTodo(todoId);
       }
     }
-
-    // 所有請求完成後，重新獲取待辦事項
-    getTodo();
+    getTodo(); // 所有請求完成後，重新獲取待辦事項
   });
 });
 
 // 將已勾選的待辦事項設置為未完成的函數
 async function uncheckTodo(todoId) {
   try {
-    await axios.patch(`${apiUrl}/todos/${todoId}/toggle`, {}); // 使用相同的 API 更新狀態
+    await axios.patch(`${apiUrl}/todos/${todoId}/toggle`, {});
   } catch (err) {
     console.log(err.response);
   }
