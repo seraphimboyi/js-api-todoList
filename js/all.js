@@ -41,8 +41,8 @@ function logout() {
   localStorage.removeItem("Authorization");
   delete axios.defaults.headers.common["Authorization"];
   alert("登出成功！");
-  // window.location.href = "https://seraphimboyi.github.io/js-api-todoList/";
-  window.location.href = "../index.html";
+  window.location.href = "https://seraphimboyi.github.io/js-api-todoList/";
+  // window.location.href = "../index.html";
 }
 
 function signUp(email, nickname, password) {
