@@ -424,16 +424,23 @@ button:hover {
   input {
     min-width: 20px;
     height: 20px;
+    margin: 0;
   }
   span {
-    display: flex;
-    justify-content: start;
-    align-items: center;
+    // display: flex;
+    // justify-content: start;
+    // align-items: center;
+    word-break: break-word;    /* 避免超長文字溢出 */
+    white-space: normal;       /* 讓內容可自動換行 */
+    flex: 1;                   /* 讓 span 占滿剩餘空間 */
   }
   li {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 16px;
+    padding-top: 16px;
   }
 }
 .todo-item-left {
@@ -479,9 +486,10 @@ button:hover {
 }
 
 .custom-checkbox {
-  position: relative;
-  display: flex;
-  align-items: center;
+  display: flex;            
+  align-items: flex-start;  
+  width: 390px;            
+  padding-left: 16px;
   cursor: pointer;
 }
 .checkbox:checked + .custom-checkbox::before {
@@ -500,13 +508,11 @@ button:hover {
   height: 14px;
   padding: 0;
 }
-.todo-list-content {
-  li {
-    border-bottom: 1px solid #e5e5e5;
-    padding-bottom: 16px;
-    padding-top: 16px;
-  }
-}
+// .todo-list-content {
+//   li {
+
+//   }
+// }
 .completed {
   color: #9F9A91;
   text-decoration: line-through;
